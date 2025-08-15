@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en-US">
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="ScreenOrientation" content="autoRotate:disabled" />
+  <meta name="theme-color" content="#FFFFFF" media=" (prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#0D0D0D" media=" (prefers-color-scheme: dark)" />
+  <meta property="og:title" content="Flashes" />
+  <meta property="og:image" content="" />
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png" />
+  <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+  <link rel="manifest" href="assets/site.webmanifest" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1,user-scalable=0" />
+  <title>Flashes</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script type="module" src="index.js"></script>
+</head>
+
+<body
+  class="text-primary dark flex flex-col h-screen w-screen h-screen content-center gap-2 disable-zoom overflow-hidden">
+  <a href="https://hachyderm.io/@tauseefk" target="_blank" rel="noopener noreferrer me" title="Mastodon"
+    class="hidden absolute">
+    Mastodon
+  </a>
+  <div id="playable-container" class="relative isolate min-h-[480px] min-w-[480px] border-2 border-primary rounded-xs">
+    <div id="role-tab" class="role-tab opacity-0">Spectator</div>
+    <div id="game-container" class="relative isolate">
+      <div id="grid-container" class="grid items-center z-10 top-0 border-box text-lg"></div>
+      <div id="overlay-container" class="absolute grid items-center z-20 top-0 border-box pointer-none opacity-0"></div>
+      <div id="mask-container" class="absolute grid items-center z-30 top-0 border-box pointer-none"></div>
+    </div>
+    <div id="announcement-container"
+      class="absolute grid items-center z-40 top-0 border-box content-center h-full w-full">
+      <span id="announcement"
+        class="blinkCursor text-sm bg-black items-start border border-primary p-2 rounded-xs opacity-0 w-[260px] md:w-[580px]">
+      </span>
+    </div>
+    <div id="play-button-container"
+      class="absolute isolate grid items-center z-50 top-0 border-box h-full w-full content-center">
+      <div class="p-4 gap-2 grid justify-center grid w-[200px] md:w-[580px] content-center">
+        <div id="play-button"
+          class="items-center bg-primary text-black p-2 rounded border border-primary grid rounded-xs max-w-[144px] min-w-[100px] cursor-pointer pointer-none">
+          wait for P2...
+        </div>
+      </div>
+    </div>
+    <div id="restart-container"
+      class="absolute isolate grid items-center z-50 top-0 border-box h-full w-full content-center opacity-0 pointer-none">
+      <div
+        class="p-4 gap-2 grid justify-center bg-black border border-primary rounded-xs grid w-[260px] md:w-[580px] content-center">
+        <span class="text-xl items-start align-center">
+          Game Over
+        </span>
+        <div class="bg-primary text-black p-2 rounded border border-primary grid rounded-xs max-w-[90px] cursor-pointer"
+          onclick="location.reload();">
+          restart?
+        </div>
+      </div>
+    </div>
+
+    <div id="particles" class="absolute grid top-0 left-0"></div>
+
+  </div>
+  <div id="buttons-container" class="grid grid-cols-2 gap-2 px-2 ml-[32px] z-50">
+    <div class="flex flex-col content-center text-2xl" id="d-pad">
+      <div class="flex cursor-pointer d-pad-button" aria-label="ArrowUp">
+        ↑
+      </div>
+      <div class="disable-zoom flex flex-row gap-2 cursor-pointer">
+        <div class="flex cursor-pointer d-pad-button" aria-label="ArrowLeft">
+          ←
+        </div>
+        <div class="flex cursor-pointer d-pad-button" aria-label="ArrowRight">
+          →
+        </div>
+      </div>
+      <div class="flex cursor-pointer d-pad-button" aria-label="ArrowDown">
+        ↓
+      </div>
+    </div>
+    <div id="flashlight" class="text-xl disable-zoom cursor-pointer flex flex-row content-center">
+      ✧
+    </div>
+  </div>
+
+  <div class="text-xl flex flex-row content-center gap-2"></div>
+</body>
+
+</html>
