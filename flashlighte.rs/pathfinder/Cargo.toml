@@ -1,0 +1,19 @@
+[package]
+name = "pathfinder"
+version = "0.1.0"
+edition = "2024"
+authors = ["tauseefk"]
+description = "Flashlight pathfinder"
+
+[lib]
+# needs rlib as it's being consumed by flashlight engine
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+batteries = { version = "0.0.1", path = "../batteries" }
+wasm-bindgen = { workspace = true }
+js-sys = { workspace = true }
+console_error_panic_hook = { workspace = true }
+
+[dev-dependencies]
+wasm-bindgen-test = "0.3.13"

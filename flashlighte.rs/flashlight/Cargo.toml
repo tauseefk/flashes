@@ -1,0 +1,26 @@
+[package]
+name = "flashlight"
+version = "0.0.3"
+edition = "2024"
+authors = ["tauseefk"]
+description = "Flashlights in the dark"
+
+[lib]
+# doesn't need rlib as it's not being consumed by any rust crates
+crate-type = ["cdylib"]
+
+[dependencies]
+batteries = { version = "0.0.1", path = "../batteries" }
+pathfinder = { version = "0.1.0", path = "../pathfinder" }
+wasm-bindgen = { workspace = true }
+js-sys = { workspace = true }
+web-sys = { workspace = true }
+console_error_panic_hook = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+shadowcaster = { workspace = true }
+yrs = { workspace = true }
+
+
+[dev-dependencies]
+wasm-bindgen-test = "0.3.13"

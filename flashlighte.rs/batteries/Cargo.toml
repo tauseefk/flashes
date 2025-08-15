@@ -1,0 +1,19 @@
+[package]
+name = "batteries"
+version = "0.0.1"
+edition = "2024"
+authors = ["tauseefk"]
+description = "Flashlight batteries"
+
+[lib]
+# needs rlib as it's being consumed by other crates
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+wasm-bindgen = { workspace = true }
+js-sys = { workspace = true }
+console_error_panic_hook = { workspace = true }
+yrs = { workspace = true }
+
+[dev-dependencies]
+wasm-bindgen-test = "0.3.13"
