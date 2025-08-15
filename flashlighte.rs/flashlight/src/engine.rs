@@ -333,7 +333,8 @@ impl Flashlight {
         self.camera.pan_camera_at(&player_cell);
     }
 
-    /// This function allows the user to select a cell on the map.
+    /// This function allows the user to move the character to a new position.
+    ///
     pub fn do_move_player(&mut self, pos: Vec2) -> MoveOutcome {
         if self.is_end_state() {
             return MoveOutcome::End;
@@ -348,18 +349,6 @@ impl Flashlight {
         }
 
         self.move_glyph(Move::new_with_data(self.player_cell, pos))
-    }
-
-    /// This function checks whether the full map is solvable.
-    /// Does not apply visibility and camera clipping masks to map state.
-    ///
-    pub fn is_solvable(&mut self) -> bool {
-        let glyphs = self.get_map_glyphs();
-
-        let monster_solution = find_path(&glyphs, self.width, Glyph::Monster, Glyph::Player);
-        let player_solution = find_path(&glyphs, self.width, Glyph::Player, Glyph::Target);
-
-        return monster_solution.len() > 0 && player_solution.len() > 0;
     }
 
     /// This function moves the monster towards the player.
@@ -391,12 +380,19 @@ impl Flashlight {
         return MoveOutcome::NoOp;
     }
 
-    /// This function allows the user to select a cell on the map.
-    /// If no cell is currently selected, it will select the given cell if it contains an
-    /// interactable glyph.
+    /// This function checks whether the full map is solvable.
+    /// Does not apply visibility and camera clipping masks to map state.
     ///
-    /// If a cell is already selected, it will attempt to move
-    /// the glyph from the selected cell to the given cell.
+    pub fn is_solvable(&mut self) -> bool {
+        let glyphs = self.get_map_glyphs();
+
+        let monster_solution = find_path(&glyphs, self.width, Glyph::Monster, Glyph::Player);
+        let player_solution = find_path(&glyphs, self.width, Glyph::Player, Glyph::Target);
+
+        return monster_solution.len() > 0 && player_solution.len() > 0;
+    }
+
+    /// Move a glyph based on the intended move.
     ///
     /// If the move is valid,
     /// it will be executed.

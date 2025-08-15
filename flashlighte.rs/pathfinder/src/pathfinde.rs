@@ -2,7 +2,7 @@ use crate::prelude::*;
 
 const POTENTIAL_DELTAS: &[Vec2; 4] = &[Vec2(-1, 0), Vec2(0, -1), Vec2(1, 0), Vec2(0, 1)];
 
-fn get_candidates_2(map_state: &Vec<Glyph>, width: u8, curr_pos_idx: u16) -> Vec<u16> {
+fn get_candidates(map_state: &Vec<Glyph>, width: u8, curr_pos_idx: u16) -> Vec<u16> {
     // at len = 256 casting as u8 fails
     let height = ((map_state.len()) / (width as usize)) as u8;
 
@@ -91,7 +91,7 @@ fn find_path_u16(
                 return Vec::from(path);
             }
 
-            let curr_neighbors = get_candidates_2(&starting_map, width, curr);
+            let curr_neighbors = get_candidates(&starting_map, width, curr);
             for neighbor in curr_neighbors {
                 if !visited_cell_idx_cache.contains(&neighbor) {
                     visited_cell_idx_cache.insert(neighbor);
@@ -133,7 +133,7 @@ pub fn find_path(
 }
 
 #[test]
-fn automatically_find_player_to_target() {
+fn find_shortest_path_from_player_to_target() {
     let starting_map: Vec<Glyph> = "_PT__.._TT..TTTXTTTT".chars().map(Glyph::from).collect();
     let shortest_path = find_path(&starting_map, 4, Glyph::Player, Glyph::Target);
     // `to` and `from` are flattened into a single array
@@ -154,7 +154,7 @@ fn automatically_find_player_to_target() {
 }
 
 #[test]
-fn automatically_find_monster_to_target() {
+fn find_shortest_path_from_monster_to_target() {
     let shortest_path = find_path(
         &"_GT__.._TT..TTTPTTTT".chars().map(Glyph::from).collect(),
         4,

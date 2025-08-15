@@ -1,8 +1,8 @@
 # Flashes
 
-https://github.com/user-attachments/assets/7707f245-0fa0-4044-a6bf-28b1517bc629
-
 A "multiplayer" roguelike built with Rust/WASM core and TypeScript.
+
+https://github.com/user-attachments/assets/7707f245-0fa0-4044-a6bf-28b1517bc629
 
 ## Prerequisites
 
@@ -34,7 +34,7 @@ flashes/
 ├─ flashlighte.rs/             // Rust workspace
 │   ├─ build.sh                // compiles engine to WASM
 │   ├─ batteries/              // core utilities and data structures crate
-│   ├─ flashlight/             // "game engine"
+│   ├─ flashlight/             // game "engine"
 │   └─ pathfinder/             // pathfinding crate
 └─ www/                        // frontend
     ├─ src/                    // client side code
