@@ -1,6 +1,6 @@
 # Flashes
 
-A "multiplayer" roguelike built with Rust/WASM core and TypeScript.
+A "multiplayer" roguelike built with Rust/WASM core and TypeScript. It uses `Y.rs` crdt for storing the game state, which enables the multiplayer functionality over WebRTC.
 
 https://github.com/user-attachments/assets/7707f245-0fa0-4044-a6bf-28b1517bc629
 
