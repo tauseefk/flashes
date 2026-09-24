@@ -1,5 +1,4 @@
 import { wasmLoader } from 'esbuild-plugin-wasm';
-import alias from 'esbuild-plugin-alias';
 import esbuild from 'esbuild';
 import path from 'node:path';
 import 'dotenv/config';
@@ -20,40 +19,39 @@ const buildOptions = {
   define: {
     SERVER_URL: JSON.stringify(process.env.SERVER_URL),
   },
-  plugins: [
-    wasmLoader(),
-    alias({
-      alias: {
-        '@engine': path.join(__dirname, './engine'),
-        '@pathfinder': path.join(__dirname, './pathfinder'),
-      },
-    }),
-  ],
+  alias: {
+    '@engine': path.join(__dirname, './engine'),
+    '@pathfinder': path.join(__dirname, './pathfinder'),
+  },
+  plugins: [wasmLoader()],
 };
 
 const run = async () => {
+  let ctx;
   try {
-    const ctx = await esbuild.context(buildOptions);
-
     if (!isDevelopment) {
       await esbuild.build(buildOptions);
       console.log('Build complete');
-
-      process.exit(0);
       return;
     }
 
-    // DEV server
+    ctx = await esbuild.context(buildOptions);
+    await ctx.watch();
     await ctx.serve({
       cors: {
-        origin: [process.env.LOCAL_NETWORK_ADDR, 'localhost'],
+        origin: [process.env.LOCAL_NETWORK_ADDR, 'localhost'].filter(Boolean),
       },
-      port: 8000,
+      port: Number(process.env.PORT ?? 8000),
       servedir: './dist',
     });
-    await ctx.watch();
+
+    const stop = () => ctx.dispose();
+    process.once('SIGINT', stop);
+    process.once('SIGTERM', stop);
   } catch (e) {
-    process.exit(1);
+    console.error(e);
+    await ctx?.dispose();
+    process.exitCode = 1;
   }
 };
 

@@ -6,8 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "node build.js",
-    "start": "node dist/index.js",
-    "dev:build": "NODE_ENV=development nodemon --ext 'ts,wasm' --watch src build.js",
+    "start": "npm run dev",
+    "typecheck": "tsc --noEmit",
+    "dev:build": "NODE_ENV=development node build.js",
     "dev:server": "shuttle run --working-directory flashes-server --port 8080",
     "dev:tsc": "tsc --watch --preserveWatchOutput",
     "lint": "biome check src",
@@ -20,9 +21,7 @@
   "devDependencies": {
     "dotenv": "^17.2.1",
     "esbuild": "^0.25.8",
-    "esbuild-plugin-alias": "^0.2.1",
     "esbuild-plugin-wasm": "^1.1.0",
-    "nodemon": "^3.1.9",
     "npm-run-all": "^4.1.5",
     "typescript": "^5.7.3"
   },
